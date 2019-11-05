@@ -2,17 +2,20 @@
 
 void mx_pop_back(t_list **head)
 {
-	printf("len -%i\n", mx_list_size(*head));
 	if(!head && !(*head)) return;
-	t_list *current = *head;
-	if(current->next == NULL){
-		free((*head));
-		*head = NULL;
+
+	if((*head)->next == NULL){
+		(*head)->data = NULL;
+		free(*head);
 		return;
 	}
-	while(current->next->next){
+
+	t_list *current = *head;
+	
+	while(current->next->next != NULL){
 		current = current->next;
 	}
+	current->next->data = NULL;
 	free(current->next);
 	current->next = NULL;	
 }

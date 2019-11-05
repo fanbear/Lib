@@ -3,16 +3,25 @@
 
 char *mx_file_to_str(const char *file)
 {
-	int ret, fd;
-	int i = 0;
-	char buf[1024]; // буфер для чтения данных из файла
-	char *str = (char *) malloc(sizeof(char) * 1024); //память для строки
-	if((fd = open(file, O_RDONLY)) < 0) return NULL; //проверка на то что в аргументе передали имя файла
-	while((ret = read(fd, buf, sizeof(buf) - 1)) > 0){ //чтения файла на размер буфера
-		str[i] = buf[i]; // перезапись из буфера в строку
-		i++;
+	int desc = 0;
+	int s_read = 0;
+	int s_file = 0;
+
+	char buf[128];
+	char *temp = NULL;
+	char *buf_str = NULL;
+
+	desc = open(file, O_RDONLY);
+	if(desc < 0) return 0;
+	while((s_read = read(desc, buf, sizeof(buf) - 1)) > 0){
+		buf[s_read] = '\0';
+		s_file += s_read;
+		buf_str = mx_strjoin(temp, buf);
+		mx_strdel(&temp);
+		temp = mx_strdup(buf_str);
+		mx_strdel(&buf_str);
 	}
-	close(fd);
-	printf("%s\n", buf);
-	return str;
+	if(close(desc) < 0) return 0;
+	
+	return temp;
 }

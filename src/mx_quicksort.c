@@ -10,7 +10,7 @@ int mx_quicksort(char **arr, int left, int right)
 	 	while (mx_strlen(arr[i]) < mx_strlen(middle)) i++;
 	 	while (mx_strlen(arr[j]) > mx_strlen(middle)) j--;
 	 	if (i <= j){
-	 		if(i < j && (mx_strlen(arr[i]) != mx_strlen(arr[j]))){
+	 		if(i != j && (mx_strlen(arr[i]) != mx_strlen(arr[j]))){
 	   			char *tmp = arr[i];
 	   			arr[i] = arr[j];
 	   			arr[j] = tmp;

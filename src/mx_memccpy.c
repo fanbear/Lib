@@ -4,14 +4,11 @@ void *mx_memccpy(void *restrict dst, const void *restrict src, int c, size_t n)
 {
 	char* str = (char *)src;
 	char* temp = (char *)dst;
-	for(int i = 0; n-- > 0; i++){
+	for(size_t i = 0; n > i; i++){
 		if(str[i] == c){
-			for(int j = 0; j != 1; j++){
-				temp[i] = str[i];
-			}
-			return temp;
+			return (void *) ((char)dst + i + 1);
 		}
 		else temp[i] = str[i];
 	}
-	return temp;
+	return NULL;
 }

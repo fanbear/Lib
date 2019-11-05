@@ -2,16 +2,11 @@
 
 void mx_str_reverse(char *s)
 {
-	int i = 0;
-	while(s[i] != '\0') {
-		i++;
-	}
-	i -= 1;
+	if(!s) return;
+	int count = mx_strlen(s);
 
-	for(int j = 0; j < i / 2; j++){
-		char d = s[j];
-		s[j] = s[i - j];
-		s[i - j] = d;
+	for(int i = 0; i < count / 2; i++){
+		mx_swap_char(&s[i], &s[count - i - 1]);
 	}
 
 }

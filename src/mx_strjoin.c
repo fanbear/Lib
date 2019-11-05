@@ -6,7 +6,6 @@ char *mx_strjoin(const char *s1, const char *s2)
 	if(s1 == NULL){
 		char *buf = mx_strnew(mx_strlen(s2));
 		return mx_strcpy(buf, s2);
-
 	}
 	if(s2 == NULL) {
 		char *buf = mx_strnew(mx_strlen(s1));
